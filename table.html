@@ -1,0 +1,269 @@
+<html>
+   <head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<script src="sample.json"></script>
+		<style>
+			body{
+				margin:3%;
+			}
+			table {
+				margin:2%;
+				font-family: arial, sans-serif;
+				border-collapse: collapse;
+				width: 80%;
+			}
+			td,th {
+				border: 1px solid #dddddd;
+				text-align: left;
+				padding: 8px;
+			}
+			tr:nth-child(even) {
+				background-color: #dddddd;
+			}
+		</style>
+   </head>
+   <body>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-sm-4 col-md-4">
+					<label>
+						Persons
+					</label>
+					<select id="dropdown1" onchange="personChange()">
+						<option value="0">Select</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-lg-4 col-md-4">
+					<label>
+						Projects
+					</label>
+					<select id="dropdown2" onchange="projectChange()">
+						<option value="0">Select</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+				</div>
+				<div class="col-sm-4 col-lg-4 col-md-4">
+					<button onclick="changeValue()">Click</button>
+				</div>
+			<div>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<table id="id01">
+						<thead>
+							<th>Person</th>
+							<th>Projects</th>
+						</thead>
+					<tbody>
+					</tbody>
+				</table>
+				</div>
+			</div>
+			<div class="row" id="row1" style="display:none">
+				<div class="col-lg-12 col-md-12 col-sm-12" >
+					<table id="id02">
+						<thead>
+							<th>Person</th>
+							<th>Projects</th>
+						</thead>
+					<tbody id="row2">
+					</tbody>
+				</table>
+				</div>
+			</div>
+		</div>
+		<script>
+		
+		/*var text={
+			"data":{
+				"repo":[
+					{aaa:["a1","a2","a3","a4","a5","a6"],fff:["hji"]},
+					{bbb:["a1","a2","a3","a4","a5","a6"],fff:["hji"]},
+					{ccc:["a1","a2","a3","a4","a5","a6"],fff:["hji"]},
+					{ddd:["a1","a2","a3","a4","a5","a6"],fff:["hji"]},
+					{eee:["a1","a2","a3","a4","a5","a6"],fff:["hji"]},
+				]
+			}
+		};*/
+		
+		var text={
+			"data":{
+				"repo":[
+					{aaa:["a1,a2,a3,a4,a5,a6"],fff:["hji"]},
+					{bbb:["b1,b2,b3,b4,b5,b6"],fff:["hji"]},
+					{ccc:["c1,c2,c3,c4,c5,c6"],fff:["hji"]},
+					{ddd:["d1,d2,d3,d4,d5,d6"],fff:["hji"]},
+					{eee:["e1,e2,e3,e4,e5,e6"],fff:["hji"]},
+				]
+			}
+		};
+		
+		$.each(text.data.repo, function(k,v) {
+			var tr = '<tr>';
+			tr += '<td>' + Object.keys(v)[0]+ '</td>';
+			//console.log(v)
+			tr += '<td>' + Object.values(v)[0]+ '</td>';
+			tr += '</tr>';
+			$("#id01").append(tr);
+			});
+		
+			/*function personChange(){
+			//alert("hi");
+			var tableLength=document.getElementById("dropdown1").value;
+			for(var i=0;i<tableLength;i++){
+			//alert(i);
+			var tr = '<tr>';
+				tr += '<td>' + Object.keys(text.data.repo[i])[0]+ '</td>';
+				//console.log(v)
+				tr += '<td>' + Object.values(text.data.repo[i])[0]+ '</td>';
+				tr += '</tr>';
+				$("#id02").append(tr);
+			}
+		}
+		
+		function projectChange(){
+			//alert("hi");
+			var tableLength=document.getElementById("dropdown1").value;
+			var tableLength1=document.getElementById("dropdown2").value;
+			for(var i=0;i<tableLength;i++){
+				
+				for(var j=1;j<tableLength1;j++){
+					//alert(i);
+					//console.log(v)
+					var tr = '<tr>';
+					tr += '<td>' + Object.keys(text.data.repo[j])+ '</td>';
+					tr += '<td>' + Object.values(text.data.repo[j])+ '</td>';
+					tr += '</tr>';
+					$("#id02").append(tr);
+				}
+			}
+		}*/
+		
+		/*function changeValue(){
+			$("#id02 tbody").empty();
+			var tableLength=document.getElementById("dropdown1").value;
+			var tableLength1=document.getElementById("dropdown2").value;
+			document.getElementById("row1").style.display = "block";
+			for(var i=0;i<tableLength;i++){
+			//alert(i);
+			var tr = '<tr>';
+				tr += '<td>' + Object.keys(text.data.repo[i])[0]+ '</td>';
+				var aList = Object.values(text.data.repo[i])[0];
+				tr += '<td>' ;
+				for(var j=0;j<tableLength1;j++){
+					tr += aList[j];
+				}
+				tr += ' </td></tr>';
+				$("#id02").append(tr);
+			}
+		}*/
+		
+		function changeValue(){
+			$("#id02 tbody").empty();
+			var tableLength=document.getElementById("dropdown1").value;
+			var tableLength1=document.getElementById("dropdown2").value;
+			document.getElementById("row1").style.display = "block";
+			for(var i=0;i<tableLength;i++){
+			//alert(i);
+			var tr = '<tr>';
+				tr += '<td>' + Object.keys(text.data.repo[i])[0]+ '</td>';
+				var aList = Object.values(text.data.repo[i])[0];
+				alert(aList)
+				var aList1=aList.split(',');
+				alert(aList1)
+				tr += '<td>' ;
+				for(var j=0;j<tableLength1;j++){
+					tr += aList1[j];
+				}
+				tr += ' </td></tr>';
+				$("#id02").append(tr);
+			}
+		}
+		
+		/*function changeValue(){
+			var tableLength=document.getElementById("dropdown1").value;
+			var tableLength1=document.getElementById("dropdown2").value;
+			for(var i=0;i<tableLength;i++){
+			//alert(i);
+			var tr = '<tr>';
+				tr += '<td>' + Object.keys(text.data.repo[i])[0]+ '</td>';
+				//var a1=Object.keys(text.data.repo[i])[0];
+				var aList = Object.values(text.data.repo[i])[0];
+				tr += '<td>' ;
+				for(var j=0;j<tableLength1;j++){
+					tr += aList[j];
+				}
+				tr += ' </td></tr>';
+				$("#id02").append(tr);
+				//console.log(v)
+				//alert(Object.keys(text.data.repo[i])[a1])
+				/*alert(tableLength1)
+				for(var j=0;j<tableLength1;j++){
+				alert(Object.keys(text.data.repo[i])[0]);
+					tr += '<td>' + Object.keys(text.data.repo[i])[0]+ '</td>';
+					tr += '</tr>';
+					//document.getElementById("row1").style.display = "block";
+					$("#id02").append(tr);
+				}*/
+			
+		
+		</script>
+		<!--<script>
+			var mydata = {
+         
+				a: ['aproject1', 'aproject2', 'aproject3'],
+         
+				b: ['bproject1', 'bproject2', 'bproject3'],
+         
+				c: ['cproject1', 'cproject2', 'cproject3']
+         
+			};
+         
+			var sel = document.getElementById('dropdown1');
+         
+			$.each(mydata, function(k, v) {
+         
+				var i = 1;
+         
+				var opt = document.createElement('option');
+         
+				opt.innerHTML = k;
+         
+				opt.value = i;
+         
+				sel.appendChild(opt);
+         
+				i++
+         
+			});
+         
+			//alert(mydata.address[1].a);
+         
+			$.each(mydata, function(k, v) {
+         
+				alert(k + ' is ' + v);
+         
+				var tr = '<tr>';
+         
+				tr += '<td>' + k + '</td>';
+         
+				tr += '<td>' + v + '</td>';
+         
+				tr += '</tr>';
+         
+				$("#id01").append(tr);
+         
+			});
+		</script>!-->
+   </body>
+</html>
